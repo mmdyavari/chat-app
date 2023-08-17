@@ -7,4 +7,6 @@ def unix_converter (unix_time):
         return unix_time/1000
         
 
-print(unix_converter(1692279143.009))
+if __name__ == "__main__":
+    print(unix_converter(1692279143.009), "python to js")
+    print(unix_converter(1692279143009), "js to python")

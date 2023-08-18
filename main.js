@@ -26,6 +26,7 @@ window.scrollTo(0, document.body.scrollHeight);
 // function for get new message
 function new_message (who) {
     if (input.value) {
+            send_button_animation()
             // remove last message's animation
             document.querySelectorAll('.messages').forEach(item => {
                 item.removeAttribute('style')
@@ -56,6 +57,20 @@ send_btn.addEventListener('click', () => {
     // new_message('sys')
     new_message('user')
 })
+
+// send message button's animation handeler 
+function send_button_animation () {
+    send_btn_plane = document.querySelector('#plane')
+    send_btn_plane.removeAttribute('style')
+
+    send_btn_plane.setAttribute("style", "animation: send .3s ease 0s 1 normal forwards;")
+    setTimeout(() => {
+        send_btn_plane.removeAttribute('style')
+        send_btn_plane.setAttribute("style", "animation: ready_to_send .3s ease 0s 1 normal forwards;")
+    }, 250);
+}
+
+
 
 // return what time ago 
 function timeAgo(someDateInThePast) {

@@ -2,11 +2,17 @@
     font-family: main;
     src: url(./other/fonts/SFPRODISPLAYREGULAR.OTF);
 }
+@font-face {
+    font-family: delbar;
+    src: url(./other/fonts/Delbar\ Bold.ttf);
+}
 
 :root {
-    --main-color : #191919;
+    --main-color : #00001c;
     --text-color : #fafafadd;
     --opacity_color : #58585857;
+    --gradient-them : linear-gradient(to right, #00aede, #0072ff);
+    --gradient-main : linear-gradient(164deg, #000000 0%, #00001c 35%, #002136 100%);
 }
 
 ::-webkit-scrollbar {
@@ -24,10 +30,15 @@
     color: var(--text-color);
 }
 
-body {
+html {
     background-color: var(--main-color);
-    /* overflow: hidden; */
+}
+
+body {
+    background: var(--main-color);
+    background: var(--gradient-main);
     min-height: 100vh;
+    min-width: 300px;
 }
 
 /* start navigation for my name */
@@ -41,12 +52,15 @@ nav {
     overflow: hidden;
     display: flex;
     align-items: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 nav h3 {
     font-weight: bold;
-    font-size: 25px;
+    font-size: 18px;
     animation: my-name .7s ease 0s 1 normal forwards;
+    font-family: delbar;
 }
 @keyframes my-name {
     0% {
@@ -114,7 +128,7 @@ main {
 }
 .user {
     border-bottom-right-radius: 7px;
-    background: linear-gradient(to right, #00aede, #0072ff);
+    background: var(--gradient-them);
     align-self: flex-end;
     padding-right: 1.5em;
 }
@@ -133,17 +147,27 @@ main {
 
 /* start footer and input message */
 footer {
-    width: 100%;
+    width: 90vw;
     overflow: hidden;
     background-color: var(--main-color);
     position: fixed;
-    padding: 1em .7em;
-    padding-top: 0;
-    bottom: 0;
+    bottom: .7em;
+    left: 50%;
+    transform: translate(-50%, 0);
     display: flex;
     align-items: center;
     justify-content: space-between;
     animation: footer .5s ease 0s 1 normal forwards;
+    padding-left: .6em;
+    min-width: 300px;
+
+    /* From https://css.glass */
+    background: rgba(41, 41, 41, 0.61);
+    border-radius: 50px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(19.5px);
+    -webkit-backdrop-filter: blur(19.5px);
+    border: 1px solid rgba(41, 41, 41, 0.3);
 }
 
 @keyframes footer {
@@ -157,15 +181,15 @@ footer {
 }
 
 #input_message {
-    background-color: var(--opacity_color);
-    width: 100%;
+    background-color: transparent;
+    width: 80%;
     height: 100%;
     padding: .5em;
     border-radius: 10px;
 }
 
 #send_btn {
-    background-color: dodgerblue;
+    background: var(--gradient-them);
     margin-left: .5em;
     width: 3em;
     height: 3em;
@@ -174,6 +198,23 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     font-weight: 900;
-    cursor: pointer;
+}
+
+@keyframes send {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(25px, -20px);
+    }
+}
+@keyframes ready_to_send {
+    0% {
+        transform: translate(-25px, 20px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
 }

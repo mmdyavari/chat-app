@@ -48,7 +48,13 @@ function new_message (who) {
             messages.push(message_info)
             // ready to get new message
             input.value = ''
-            window.scrollTo(0, document.body.scrollHeight);
+            // scrool to end of page 
+            window.scroll({
+                top: document.body.scrollHeight, 
+                left: 0, 
+                behavior: 'smooth'
+              });
+            console.log(document.body.scrollHeight)
     }
 }
 

@@ -35,7 +35,7 @@ function new_message (who) {
             main = document.querySelector('main')
             time_of_send = Date.now()
             // show the new message
-            main.innerHTML += `<div class="${who} messages" style="animation: main .7s ease 0s 1 normal forwards;">
+            main.innerHTML += `<div class="${who} messages" style="animation: main .4s ease 0s 1 normal forwards;">
                 ${input.value} 
                 <span class="messages-time">${timeAgo(time_of_send)}</span>
             </div>`
@@ -106,3 +106,72 @@ function timeAgo(someDateInThePast) {
     return result + ' ago';
 }
 
+
+// animation handeler for change dark mood button's icon
+function dark_mood_animation (sun_or_moon) {
+    dark_mood_icon = document.querySelector('#dark_mood_icon')
+    dark_mood_icon.removeAttribute('style')
+    if (sun_or_moon == "sun"){
+        dark_mood_icon.src = "./other/moon.svg"
+    } else {
+        dark_mood_icon.src = "./other/sun.png"
+    }
+
+    dark_mood_icon.setAttribute("style", "animation: moon .3s ease 0s 1 normal forwards;")
+    setTimeout(() => {
+        dark_mood_icon.removeAttribute('style')
+        if (sun_or_moon == "sun"){
+            dark_mood_icon.src = "./other/sun.png"
+        } else {
+            dark_mood_icon.src = "./other/moon.svg"
+        }
+        dark_mood_icon.setAttribute("style", "animation: sun .3s ease 0s 1 normal forwards;")
+    }, 100);
+}
+
+// function for handel dark mood 
+let flag = true
+function dark_mood () {
+    if (flag) {
+        // dark mood to light mood 
+        document.documentElement.style.cssText = `
+            --main-color : #fafafa;
+            --text-color : #2d2d2d;
+            --user-message-text-color : #fafafa;
+            --opacity_color : #e2e2e2;
+            --gradient-them : linear-gradient(to right, #00aede, #0072ff);
+            --gradient-main : linear-gradient(164deg, rgb(250, 250, 250) 0%, #fafafa 35%, #a8d9e6 100%);`;
+
+        // change footer to light mood
+        document.querySelector('footer').id = 'footer_light'
+        // change dark mood icon with animation
+        dark_mood_animation("sun")
+        // change meta them color's value 
+        document.querySelector('#meta_them_color').content = "#fafafa"
+    } else {
+        // light mood to dark mood
+        document.documentElement.style.cssText = `
+            --main-color : #00001c;
+            --text-color : #fafafadd;
+            --user-message-text-color : #fafafa;
+            --opacity_color : #58585857;
+            --gradient-them : linear-gradient(to right, #00aede, #0072ff);
+            --gradient-main : linear-gradient(164deg, #000000 0%, #00001c 35%, #002136 100%);`;
+        
+        // change footer to dark mood
+        document.querySelector('footer').id = 'footer_dark'
+        // change dark mood icon with animation
+        dark_mood_animation("moon")
+        // change meta them color's value 
+        document.querySelector('#meta_them_color').content = "#00001c"
+    }
+}
+// dark_mood()
+document.querySelector('#dark_mood_btn').addEventListener ('click', (enevt) => {
+    dark_mood()
+    if (flag) {
+        flag = false
+    } else {
+        flag = true
+    }
+})

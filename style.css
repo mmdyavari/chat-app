@@ -10,6 +10,7 @@
 :root {
     --main-color : #00001c;
     --text-color : #fafafadd;
+    --user-message-text-color : #fafafa;
     --opacity_color : #58585857;
     --gradient-them : linear-gradient(to right, #00aede, #0072ff);
     --gradient-main : linear-gradient(164deg, #000000 0%, #00001c 35%, #002136 100%);
@@ -52,13 +53,14 @@ nav {
     overflow: hidden;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
 nav h3 {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 15px;
     animation: my-name .7s ease 0s 1 normal forwards;
     font-family: delbar;
 }
@@ -75,12 +77,56 @@ nav h3 {
         letter-spacing: 0;
     }
 }
+#dark_mood_btn {
+    width: 2em;
+    height: 2em;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5em;
+    animation: dark-mood .7s ease 0s 1 normal forwards;
+    overflow: hidden;
+}
+/* animation for change icon of dark mood button */
+@keyframes moon {
+    0% {
+        opacity: 1;
+        transform: translate(0px, 0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(0px, -28px);
+    }
+}
+@keyframes sun {
+    0% {
+        opacity: 0;
+        transform: translate(0px, 28px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0px, 0px);
+    }
+}
+
+
+/* show dark mood button in page when relode page */
+@keyframes dark-mood  {
+    0% {
+        margin-right: -50px;
+    }
+    100% {
+        margin-right: 0;
+        opacity: 1;
+    }
+}
 
 /* start chatts container and messages */
 main {
     width: 100%;
     padding: .5em;
-    animation: main .7s ease 0s 1 normal forwards;
+    animation: main .5s ease 0s 1 normal forwards;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -89,18 +135,16 @@ main {
 @keyframes main {
     0% {
         opacity: 0;
-        color: #00000000;
         margin-top: 15px;
     }
     100% {
         opacity: 1;
         margin-top: 0;
-        color: var(--text-color);
     }
 }
 .messages {
     background-color: var(--opacity_color);
-    padding: 1em;
+    padding: .5em 1em;
     width: fit-content;
     border-radius: 30px;
     margin-bottom: 15px;
@@ -110,16 +154,16 @@ main {
 .messages:last-child {
     margin-bottom: 5em;
 }
+
+/* send new message's animation */
 @keyframes message {
     0% {
         opacity: 0;
-        color: #00000000;
         margin-top: 15px;
     }
     100% {
         opacity: 1;
         margin-top: 0;
-        color: var(--text-color);
     }
 }
 .sys {
@@ -129,6 +173,7 @@ main {
 .user {
     border-bottom-right-radius: 7px;
     background: var(--gradient-them);
+    color: var(--user-message-text-color);
     align-self: flex-end;
     padding-right: 1.5em;
 }
@@ -142,7 +187,7 @@ main {
 }
 .user .messages-time {
     text-align: end;
-    
+    color: var(--user-message-text-color);
 }
 
 /* start footer and input message */
@@ -160,16 +205,7 @@ footer {
     animation: footer .5s ease 0s 1 normal forwards;
     padding-left: .6em;
     min-width: 300px;
-
-    /* From https://css.glass */
-    background: rgba(41, 41, 41, 0.61);
-    border-radius: 50px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(19.5px);
-    -webkit-backdrop-filter: blur(19.5px);
-    border: 1px solid rgba(41, 41, 41, 0.3);
 }
-
 @keyframes footer {
     0% {
         opacity: 0;
@@ -178,6 +214,24 @@ footer {
     100% {
         opacity: 1;
     }
+}
+
+#footer_dark {
+    background: rgba(41, 41, 41, 0.61);
+    border-radius: 50px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(19.5px);
+    -webkit-backdrop-filter: blur(19.5px);
+    border: 1px solid rgba(41, 41, 41, 0.3);
+}
+
+#footer_light {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(19.9px);
+    -webkit-backdrop-filter: blur(19.9px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #input_message {
@@ -202,6 +256,7 @@ footer {
     font-weight: 900;
 }
 
+/* animation for send buttons's plane */
 @keyframes send {
     0% {
         transform: translate(0, 0);
